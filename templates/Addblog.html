@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% block body %}
+    {% comment %} {% include 'messages.html' %} {% endcomment %}
+<center>
+    <div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">button</button>
+    </form>
+    </div> 
+    {% comment %} <div class="container">
+        <h1><a href="{% url 'DetailViewPostallname' %}">all posts with class based function</a></h1>
+        <div class="row">
+            {% for b in blog %}
+                <div class="col">
+                    <a href="{% url 'detailviewname' b.id %}"><p>{{ b.wrtier }}</p></a>
+                    <p>{{ b.title }}</p>
+                    <p>{{ b.body }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div> {% endcomment %}
+    <input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+</center>
+{% endblock body %}

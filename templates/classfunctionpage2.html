@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% include 'messages.html' %}
+{% include 'searcha.html' %}
+<div class="container">
+    <div class="row">
+        {% for b in bitch  %}
+        
+            <div class="col">
+                <p>{{ b.wrtier }}</p>
+                <p><a href="{% url 'DetailViewPostNAME' b.slug %}">{{ b.title }}</a></p>
+                <p>{{ b.slug }}</p>
+                <p>{{ b.body| truncatewords:25 }}</p>
+                <p>{{ b.date }}</p>
+                
+            </div>
+        {% empty %}
+            
+            <h1>no blogs <a href="{% url 'AddPostNAME' %}">create one</a></h1>
+        {% endfor %}
+        <h1><a href="{% url 'AddPostNAME' %}">create Blogs Function based</a></h1>
+        <h1><a href="{% url 'AddPostClassBasedNAME' %}">create Blogs Class based</a></h1>
+        <h1><a href="{% url 'ContactClassBasedNAME' %}">contact Class Based</a></h1>
+        <h1><a href="{% url 'ListViewcontactallNAME' %}">all contacts</a></h1>
+
+
+        <input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<center>
+<div class="container">
+    <div class="row">
+
+            <div class="col">
+                <p>{{ object.wrtier }}</p>
+                <p>{{ object.title }}</p>
+                <p>{{ object.body }}</p>
+            </div>
+
+    </div>
+</div>
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+
+</center>
+{% endblock body %}

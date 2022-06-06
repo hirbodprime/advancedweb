@@ -1,0 +1,17 @@
+<html>
+    <title>Download File</title>
+</head>
+<body>
+<center>
+   <h1>Advanced Django Methods</h1>
+   <h1><a href="{% url 'ListViewPostallNAME' %}">Blogs</a></h1>
+    {% if f %}
+    <ul class="messages">
+        <li>{{ f }} not found</li>
+    </ul>
+    {% endif %}
+   <a href="{% url 'downloadviewname' filename='file.txt' %}">Download PDF</a>
+   <a href="{% url 'downloadviewname' filename='03 - Paul Anka - Papa.mp3' %}">Download Music</a>
+</center>
+</body>
+</html>
