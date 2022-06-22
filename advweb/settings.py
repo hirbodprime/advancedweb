@@ -87,8 +87,8 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PICKLE_VERSION": -1  # Will use highest protocol version available
-
+            "PICKLE_VERSION": -1, # Will use highest protocol version available
+            # "SOCKET_TIMEOUT": 5
         }
     }
 }

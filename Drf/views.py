@@ -104,6 +104,11 @@ class DetailViewPost(View):
             bloge_id = cache.get(blog_id)
             print("Im here2")
             # get_redis_connection("default").flushall()
+            from django_redis import get_redis_connection
+
+            r = get_redis_connection("default") 
+            connection_pool = r.connection_pool
+            print(f"Created connections so far: {connection_pool._created_connections}" )
         else:
             try:
                 bloge_id = blogmodel.objects.get(pk=blog_id)
