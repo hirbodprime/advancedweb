@@ -10,11 +10,13 @@
         
             <div class="col">
                 <p>{{ b.wrtier }}</p>
-                <p><a href="{% url 'DetailViewPostNAME' b.slug %}">{{ b.title }}</a></p>
+                <p><a href="{% url 'DetailViewPostNAME' b.pk %}">{{ b.title }}</a></p>
                 <p>{{ b.slug }}</p>
                 <p>{{ b.body| truncatewords:25 }}</p>
                 <p>{{ b.date }}</p>
-                
+                <p>Updated : {{ b.created_date }}</p>
+                <a href="{% url 'EditPostNAME' b.pk %}">Update Post</a>
+                <a href="{% url 'DeletePostNAME' b.pk %}">Delete Post</a>
             </div>
         {% empty %}
             

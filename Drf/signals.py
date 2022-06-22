@@ -8,6 +8,8 @@ from .models import blogmodel, contactModel
 from colorama import Fore
 import colorama
 colorama.init(autoreset=True)
+
+
 def pre_save_slugify(sender , instance , *args, **kwargs):
     if not instance.slug:
         # print(Fore.LIGHTRED_EX + 'FUCK YOU')
@@ -25,7 +27,7 @@ pre_save.connect(pre_save_slugify ,sender=blogmodel)
 
 def pre_delete_print(sender, instance, *args, **kwargs):
     if instance.title:
-        print(instance.title)
+        # print(instance.title)
         # 30 days trash bin then full delete
         i = input('are you sure? ')
         if i == 'yes':

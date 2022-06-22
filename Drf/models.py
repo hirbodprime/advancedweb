@@ -23,6 +23,7 @@ class blogmodel(models.Model):
     slug = models.SlugField(unique=True , null=True , blank=True)
     body = models.TextField(max_length=1000)
     date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.title 
 
@@ -34,4 +35,5 @@ class contactModel(models.Model):
     status =models.BooleanField(null=True,blank=True)
     def __str__(self):
         return self.name 
+
     

@@ -1,17 +1,18 @@
 from pyexpat.errors import messages
-from urllib import request
-from webbrowser import get
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.http import  HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from rest_framework.decorators import api_view
-from .forms import apiform
+from .forms import  apiform
 from .serializers import blogserializer
 from .models import blogmodel, contactModel
 from rest_framework.response import Response
-from django.views.generic import DetailView , ListView , CreateView
+from django.views.generic import DetailView , ListView , CreateView , UpdateView , DeleteView , FormView , View
 from django.contrib import messages
 from rest_framework import status
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin 
+
 def searchview(req):
     sea = req.POST.get('search' , None)
     if sea == None:
@@ -90,12 +91,32 @@ def AddPost(req):
     return render(req , 'Addblog.html' , {'blog':query , 'form':form})
 
 
+from django.core.cache import cache
+# from django_redis import get_redis_connection
+class DetailViewPost(View):
     
-class DetailViewPost(DetailView):
-    model = blogmodel
-    template_name = "classfunctionpage.html"
+    # model = blogmodel
+    # template_name = "classfunctionpage.html"
+    def get(self,request , *args , **kwargs):
+        
+        blog_id = kwargs["pk"]        
+        if cache.get(blog_id):
+            bloge_id = cache.get(blog_id)
+            print("Im here2")
+            # get_redis_connection("default").flushall()
+        else:
+            try:
+                bloge_id = blogmodel.objects.get(pk=blog_id)
+                cache.set(blog_id,bloge_id)
+                print("Im here")
+            except blogmodel.DoesNotExist:
+                return HttpResponse("wtf")
+        return render(request , "makeitfunctioni.html" , {"model":bloge_id})
+
 
 class ListViewPostall(ListView):
+
+    
     model = blogmodel
     # context_object_name = "bitch" # when changing get_context_date method we wont need this
     template_name = "classfunctionpage2.html"
@@ -113,10 +134,11 @@ class ListViewPostall(ListView):
         context['bitch'] = query_set
         return context
 
-class AddPostClassBased(CreateView):
+class AddPostClassBased(LoginRequiredMixin,CreateView):
     model = blogmodel
     template_name = 'Addblog.html'
     fields = ['wrtier' , 'title' , 'body']
+    login_url='/admin/login'
     def get_success_url(self):
         from django.urls import reverse
         return reverse('ListViewPostallNAME')
@@ -139,3 +161,30 @@ class contactview(ListView):
         query= contactModel.objects.filter(status=True)
         context['contact']=query
         return context
+
+
+class UpdateViewClassBased(UpdateView):
+    model=blogmodel
+    fields=['wrtier','title','body']
+    template_name='Addblog.html'
+    def get_success_url(self):
+        from django.urls import reverse
+        return reverse('ListViewPostallNAME')
+
+class DeleteViewClassBased(DeleteView):
+    model=blogmodel
+    template_name='deleteask.html'
+    success_url=reverse_lazy('ListViewPostallNAME')
+
+
+
+# class FormViewClassBased(FormView):
+#     template_name=''
+#     form_class=Contactform
+#     success_url=reverse_lazy('ListViewPostallNAME')
+#     def form_valid(self, form):
+#         name=form.cleaned_data['name']
+#         message=form.cleaned_data['message']
+#         form.send_email()
+#         return super().form_valid(form)
+
