@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include("advapp.urls")),
     path('drf/' , include("Drf.urls")),
+    path('profile/',include("fullprofile.urls"))
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
