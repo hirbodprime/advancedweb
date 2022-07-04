@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 
 # Define function to download pdf file using template
 def download(req):
-    return render(req, 'file.html')
+    return render(req, 'download/file.html')
 
 def download_file(request, filename=''):
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,7 +16,7 @@ def download_file(request, filename=''):
             except (FileNotFoundError , FileExistsError):
             # except FileNotFoundError:
                 context = {"f":filename}
-                return render(request , "file.html", context)
+                return render(request , "download/file.html", context)
             mime_type, _ = mimetypes.guess_type(filepath) 
             # Set the return value of the HttpResponse
             response = HttpResponse(path, content_type=mime_type)

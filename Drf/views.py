@@ -22,7 +22,7 @@ def searchview(req):
     # blog = blogmodel.objects.filter(Q(title__icontains=sea) | Q(title__startswith=sea) | Q(title__contains=sea) | Q(title__endswith=sea))
         # blog = blogmodel.objects.filter(Q(title__contains=sea) | Q(body__contains=sea))
         blog = blogmodel.objects.filter(title__contains=sea)
-        return render(req , 'search.html' , {'bitch':blog , "sea":sea})
+        return render(req , 'search/search.html' , {'bitch':blog , "sea":sea})
 
 # @api_view(['GET'])
 # def BlogView(req):
@@ -88,7 +88,7 @@ def AddPost(req):
             return HttpResponseRedirect('/drf')
     else:
         form = apiform()
-    return render(req , 'Addblog.html' , {'blog':query , 'form':form})
+    return render(req , 'methods/Addblog.html' , {'blog':query , 'form':form})
 
 
 from django.core.cache import cache
@@ -112,11 +112,11 @@ class DetailViewPost(View):
         else:
             try:
                 bloge_id = blogmodel.objects.get(pk=blog_id)
-                cache.set(blog_id,bloge_id)
-                print("Im here")
+                reddis = cache.set(blog_id,bloge_id)
+                print(reddis)
             except blogmodel.DoesNotExist:
                 return HttpResponse("wtf")
-        return render(request , "makeitfunctioni.html" , {"model":bloge_id})
+        return render(request , "methods/makeitfunctioni.html" , {"model":bloge_id })
 
 
 class ListViewPostall(ListView):
@@ -124,7 +124,7 @@ class ListViewPostall(ListView):
     
     model = blogmodel
     # context_object_name = "bitch" # when changing get_context_date method we wont need this
-    template_name = "classfunctionpage2.html"
+    template_name = "methods/classfunctionpage2.html"
     
     # def get_queryset(self , *args, **kwargs):
     #     qs = super(ListViewPostall , self).get_queryset(*args, **kwargs)
@@ -141,7 +141,7 @@ class ListViewPostall(ListView):
 
 class AddPostClassBased(LoginRequiredMixin,CreateView):
     model = blogmodel
-    template_name = 'Addblog.html'
+    template_name = 'methods/Addblog.html'
     fields = ['wrtier' , 'title' , 'body']
     login_url='/admin/login'
     def get_success_url(self):
@@ -151,7 +151,7 @@ class AddPostClassBased(LoginRequiredMixin,CreateView):
 
 class ContactViewClassBased(CreateView):
     model=contactModel
-    template_name='Addblog.html'
+    template_name='methods/Addblog.html'
     fields=['name' , 'email' , 'body']
     def get_success_url(self):
         from django.urls import reverse
@@ -159,7 +159,7 @@ class ContactViewClassBased(CreateView):
 
 class contactview(ListView):
     model=contactModel
-    template_name='contact.html'
+    template_name='methods/contact.html'
     # context_object_name='contact'
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
@@ -171,14 +171,14 @@ class contactview(ListView):
 class UpdateViewClassBased(UpdateView):
     model=blogmodel
     fields=['wrtier','title','body']
-    template_name='Addblog.html'
+    template_name='methods/Addblog.html'
     def get_success_url(self):
         from django.urls import reverse
         return reverse('ListViewPostallNAME')
 
 class DeleteViewClassBased(DeleteView):
     model=blogmodel
-    template_name='deleteask.html'
+    template_name='methods/deleteask.html'
     success_url=reverse_lazy('ListViewPostallNAME')
 
 
