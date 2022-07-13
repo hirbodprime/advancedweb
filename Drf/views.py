@@ -11,7 +11,7 @@ from django.views.generic import DetailView , ListView , CreateView , UpdateView
 from django.contrib import messages
 from rest_framework import status
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def searchview(req):
     sea = req.POST.get('search' , None)
@@ -80,10 +80,16 @@ def UpdateBlogAPI(req , id):
 
 def AddPost(req):
     query = blogmodel.objects.all().order_by('date')
-    form = apiform(req.POST)
+    form = apiform(req.POST or None)
     if req.method == "POST":
+
         if form.is_valid():
-            form.save()
+            phone = form.cleaned_data["phone_number"]
+            title = form.cleaned_data["title"]
+            body = form.cleaned_data["body"]
+            wrtier = form.cleaned_data["wrtier"]
+            objectsmodel = blogmodel.objects.create(title=title , body=body , wrtier = wrtier , phone_number=phone)
+            objectsmodel.save()
             messages.success(req , 'success')
             return HttpResponseRedirect('/drf')
     else:
@@ -120,8 +126,6 @@ class DetailViewPost(View):
 
 
 class ListViewPostall(ListView):
-
-    
     model = blogmodel
     # context_object_name = "bitch" # when changing get_context_date method we wont need this
     template_name = "methods/classfunctionpage2.html"
@@ -182,14 +186,4 @@ class DeleteViewClassBased(DeleteView):
     success_url=reverse_lazy('ListViewPostallNAME')
 
 
-
-# class FormViewClassBased(FormView):
-#     template_name=''
-#     form_class=Contactform
-#     success_url=reverse_lazy('ListViewPostallNAME')
-#     def form_valid(self, form):
-#         name=form.cleaned_data['name']
-#         message=form.cleaned_data['message']
-#         form.send_email()
-#         return super().form_valid(form)
 

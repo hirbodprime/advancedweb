@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "customusers.CustomUsers"
 
 # Application definition
 
@@ -37,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "advapp",'rest_framework' , 'Drf' , 'crispy_forms'
+    "advapp",'rest_framework' , 'Drf' , 'crispy_forms' , 'customusers'
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -109,6 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    # {
+    #     'NAME':'customusers.validators.CheckPasswords'
+    # },
 ]
 
 
@@ -133,6 +139,7 @@ STATIC_URL = '/static/'
 STATIC_DIR = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

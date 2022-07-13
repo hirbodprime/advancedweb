@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+{#        {{ form.as_p }}#}
+{#        {% for f in form %}#}
+{#            <div class="field">#}
+{#                {{ f.label_tag }} {{ f }} {{ f.help_text }}#}
+{#            </div>#}
+{#        {%  endfor %}#}
+{#        {% if form.errors %}#}
+{#            {{ form.errors }}#}
+{#        {% endif %}#}
+        {{ form.password.errors }}
+        <ul>
+            <li>
+                {{ form.username.errors }}
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {{ form.username.help_text }}
+            </li><br/>
+            <li>
+                {{ form.email.errors }}
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.help_text }}
+            </li><br/>
+            <li>
+                {{ form.phone_number.errors }}
+                {{ form.phone_number.label_tag }}
+                {{ form.phone_number }}
+                {{ form.phone_number.help_text }}
+            </li><br/>
+            <li>
+                {{ form.first_name.errors }}
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+                {{ form.first_name.help_text }}
+            </li><br/>
+            <li>
+                {{ form.last_name.errors }}
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+                {{ form.last_name.help_text }}
+            </li><br/>
+
+            <li>
+                {{ form.password.errors }}
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                {{ form.password.help_text }}
+            </li><br/>
+            <li>
+                {{ form.re_password.errors }}
+                {{ form.re_password.label_tag }}
+                {{ form.re_password }}
+                {{ form.re_password.help_text }}
+            </li><br/>
+            <li>
+                {{ form.profile_image.errors }}
+                {{ form.profile_image.label_tag }}
+                {{ form.profile_image }}
+                {{ form.profile_image.help_text }}
+            </li>
+        </ul>
+        <button id="buttonUser" type="submit">submit data</button>
+    </form>
+
+</body>
+</html>

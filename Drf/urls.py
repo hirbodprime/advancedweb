@@ -22,7 +22,6 @@ urlpatterns = [
     path('FindAPI/<int:id>/' , FindBlogAPI , name='FindBlogAPIName'),
     path('Find/<int:pk>' , DetailViewPost.as_view() , name="DetailViewPostNAME"),   
     path('DeleteAPI/<int:id>/' , DeleteBlogAPI , name='DeleteBlogAPIName'),   
-    path('UpdateAPI/<int:id>/' , UpdateBlogAPI , name='UpdateBlogAPIName'),   
-
+    path('UpdateAPI/<int:id>/' , UpdateBlogAPI , name='UpdateBlogAPIName'),
 ] 
  
