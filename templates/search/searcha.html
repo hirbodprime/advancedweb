@@ -1,0 +1,11 @@
+{% include 'search/nav.html' %}
+<br>
+<center>
+<div class="">
+<form method="POST" action="{% url 'searchviewname' %}">
+    {% csrf_token %}
+    <input type="text" name="search" placeholder="Search.." required>
+    <button type="submit" class="btn btn-primary">search</button>
+</form>
+</div>
+</center>

@@ -24,6 +24,10 @@ class blogmodel(models.Model):
     body = models.TextField(max_length=1000)
     date = models.DateTimeField(auto_now_add=True)
     created_date = models.DateTimeField(auto_now=True)
+<<<<<<< HEAD:Blog/models.py
+=======
+    phone_number = models.CharField(max_length=20, null=True , blank=True)
+>>>>>>> e39282af7ba2360966acc8113554803c3bf5ba8c:Drf/models.py
     def __str__(self):
         return self.title 
 

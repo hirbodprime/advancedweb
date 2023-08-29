@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/advweb.iml" filepath="$PROJECT_DIR$/.idea/advweb.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/advancedweb.iml" filepath="$PROJECT_DIR$/.idea/advancedweb.iml" />
+>>>>>>> e39282af7ba2360966acc8113554803c3bf5ba8c
     </modules>
   </component>
 </project>

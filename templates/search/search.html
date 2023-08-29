@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% include 'search/searcha.html' %}
+<div class="container">
+    <div class="row">
+        {% if sea %}
+            <h1>you searched for {{sea}}</h1>
+            {% for b in bitch  %}
+                <div class="col">
+                    <p>{{ b.wrtier }}</p>
+                    <p>{{ b.title }}</p>
+                    <p>{{ b.body }}</p>
+                    <p>{{ b.date }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1> search not found   </h1>
+        {% endif %}
+        <h1><a href="{% url 'AddPostNAME' %}">create more blogs</a></h1>
+        <input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+    </div>
+</div>
+
+
+{% endblock body %}
