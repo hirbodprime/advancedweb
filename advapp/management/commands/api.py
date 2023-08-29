@@ -15,7 +15,7 @@ class Command(BaseCommand):
         dele = options['delete']
         gete = options['get']
         bloge = f'blog with id {idblog} does not exist'
-        from Drf.models import blogmodel
+        from Blog.models import blogmodel
         if dele:   
             try:
                 import requests
